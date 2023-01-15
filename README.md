@@ -26,10 +26,8 @@ Recomendamos a criação de uma pequena REST Ful API JSON para deixar mais otimi
   2. Instale as dependências:
    * `npm install`image.png
 
-  3. Inicialize a aplicação e aguarde a mensagem de 'Ok' no terminal:
+  3. Inicialize a aplicação e aguarde a mensagem de 'Online' no terminal:
    * `npm start`
-
-![Exemplo da inicialização](src/assets/start.png)
 
 # Sobre o Projeto
 

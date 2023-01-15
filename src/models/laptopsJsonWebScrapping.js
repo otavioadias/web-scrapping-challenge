@@ -1,19 +1,16 @@
 import puppeteer from "puppeteer";
-import fs from "fs";
+import * as dotenv from 'dotenv';
 
-const url = "https://webscraper.io/test-sites/e-commerce/allinone/computers/laptops";
-const lenovoLaptops = [];
+dotenv.config();
 
 const getLenovoLaptops = async () => {
+    const lenovoLaptops = [];
     const browser = await puppeteer.launch();
     const page = await browser.newPage();
-    console.log('Iniciou');
 
-    await page.goto(url);
-    console.log('Entrou na URL');
+    await page.goto(process.env.URL_LAPTOPS);
 
     await page.waitForSelector('.col-sm-4 > .thumbnail');
-    console.log('Esperou');
 
     const links = await page.$$eval(
         '.col-sm-4 > .thumbnail > .caption > h4 > a',
@@ -26,13 +23,15 @@ const getLenovoLaptops = async () => {
         await page.goto(link);
         await page.waitForSelector('.col-md-9');
 
-        const title = await page.$eval('.caption > h4:nth-of-type(2)', element => element.innerText);
-        const price = await page.$eval('.caption > .pull-right', element => element.innerText.replace(/[^\d.-]/g, ''));
-        const description = await page.$eval('.description', element => element.innerText);
-        const memory = await page.$eval('.memory', element => element.innerText);
-        const swatches = await page.$eval('.swatches', element => element.innerText);
-        const ratings = await page.$eval('.ratings p', element => element.innerText);
-        const stars = await page.$$eval('.ratings span', spans => spans.length);
+        const [title, price, description, memory, swatches, ratings, stars] = await Promise.all([
+            page.$eval('.caption > h4:nth-of-type(2)', element => element.innerText),
+            page.$eval('.caption > .pull-right', element => element.innerText.replace(/[^\d.-]/g, '')),
+            page.$eval('.description', element => element.innerText),
+            page.$eval('.memory', element => element.innerText),
+            page.$eval('.swatches', element => element.innerText),
+            page.$eval('.ratings p', element => element.innerText),
+            page.$$eval('.ratings span', spans => spans.length)
+        ]);
 
         const obj = {
             title,
@@ -49,15 +48,12 @@ const getLenovoLaptops = async () => {
 
     const lenovoLaptopsSort = lenovoLaptops.sort((a, b) => a.price - b.price);
 
-    fs.writeFile('lenovoLaptops.json', JSON.stringify(lenovoLaptopsSort, null, 2), err => {
-        if(err) throw new Error('Something went wrong');
-
-        console.log('Ok');
-    });
+    // fs.writeFile('lenovoLaptops.json', JSON.stringify(lenovoLaptopsSort, null, 2), err => {
+    //     if(err) throw new Error('Something went wrong');
+    // });
 
     await browser.close();
+    return lenovoLaptopsSort;
 };
-
-getLenovoLaptops();
 
 export default getLenovoLaptops;

@@ -5,9 +5,7 @@ const __dirname = path.resolve();
 
 export const readLenovoLaptops = async () => {
   try {
-    const arrayLaptops = await fs.promises.readFile(
-      join(__dirname, "../in8-devnology-challenge/lenovoLaptops.json"), "utf8");
-    return JSON.parse(arrayLaptops);
+    return await getLenovoLaptops();
   } catch (err) {
     console.log(err);
     return err;
@@ -15,7 +13,7 @@ export const readLenovoLaptops = async () => {
 };
 
 export const findByDescription = async (params) => {
-  const arrayLaptops = await readLenovoLaptops();
+  const arrayLaptops = await getLenovoLaptops();
   const laptop = arrayLaptops.filter((cur) =>
     cur.description.includes(params)
   );
