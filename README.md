@@ -195,4 +195,9 @@ Recomendamos a criação de uma pequena REST Ful API JSON para deixar mais otimi
 ]
 ```
 
+# Testes
 
+Para rodar testes no seu back-end, utilize o comando com o servidor parado:
+  - `npm test`
+
+ ![Exemplo dos tests](src/assets/tests.png)
