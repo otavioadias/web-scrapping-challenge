@@ -1,18 +1,29 @@
 {
+  "type": "module",
   "name": "in8-devnology-challenge",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node src/index.js",
+    "test": "mocha ./src/tests/*$NAME*.{test,spec}.js -t 10000 --exit",
+    "test:coverage": "nyc npm run test"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "puppeteer": "^19.5.2"
+    "chai-http": "^4.3.0",
+    "dotenv": "^16.0.3",
+    "express": "^4.18.2",
+    "express-async-errors": "^3.1.1",
+    "puppeteer": "^19.5.2",
+    "sinon": "^15.0.1"
   },
   "devDependencies": {
-    "@tsconfig/node16": "1.0"
+    "@tsconfig/node16": "1.0",
+    "chai": "^4.3.7",
+    "mocha": "^10.2.0",
+    "sinon-chai": "^3.7.0"
   }
 }
