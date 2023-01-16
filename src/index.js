@@ -1,6 +1,8 @@
+import 'express-async-errors';
 import express from 'express';
 import bodyParser from 'body-parser';
 import laptopsRoute from './routes/laptopsRoute.js';
+import { errorMiddleware } from './middlewares/errorMiddleware.js';
 
 const app = express();
 app.use(bodyParser.json());
@@ -17,3 +19,5 @@ app.get('/', (_request, response) => {
   });
 
 app.use('/laptops', laptopsRoute);
+
+app.use(errorMiddleware);
