@@ -24,9 +24,9 @@ Recomendamos a criação de uma pequena REST Ful API JSON para deixar mais otimi
     * `cd in8-devnology-challenge`
 
   2. Instale as dependências:
-   * `npm install`image.png
+   * `npm install`
 
-  3. Inicialize a aplicação e aguarde a mensagem de 'Online' no terminal:
+  3. Inicialize a aplicação:
    * `npm start`
 
 # Sobre o Projeto
