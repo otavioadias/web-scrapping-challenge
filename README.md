@@ -1,4 +1,4 @@
-# Boas Vindas ao repositório do IN8 - Devnology | TECH CHALLENGE!
+# Boas Vindas ao repositório do WebScrapping | TECH CHALLENGE!
 
 Aplicação Back-End que faz WebScrapping utilizando Node.js + Puppeteer;
 
